@@ -5,7 +5,8 @@ import socksBlueImage from './assets/images/socks_blue.jpeg'
 
 const product = ref('Socks')
 const image = ref(socksGreenImage)
-const inStock = true
+const inStock = false;
+// const inStock = true;
   
 const details = ref(['50% cotton', '30% wool', '20% polyester'])
 
@@ -28,7 +29,15 @@ const updateImage = (variantImage) => image.value = variantImage
   <div class="product-display">
     <div class="product-container">
       <div class="product-image">    
-        <img v-bind:src="image">
+        <!-- <img v-bind:src="image" v-if="inStock">
+        <img v-bind:src="image" class="out-of-stock-img" v-else> -->
+
+        <!-- syntax :class="{'classname': conditionref/condition}" -->
+        <!-- <img v-bind:src="image" :class="{'out-of-stock-img': !inStock}" >  -->
+
+        <!-- syntax :class="[ conditionref/condition ? 'classname': '' ]" -->
+        <img v-bind:src="image" :class="[ inStock ? 'out-of-stock-img': '' ]" > 
+
       </div>
       <div class="product-info">
         <h1>{{ product }}</h1>
@@ -40,10 +49,19 @@ const updateImage = (variantImage) => image.value = variantImage
         <div v-for="variant in variants" 
           :key="variant.id"
           @mouseover="updateImage(variant.image)"
+          class="color-circle"
+          :style="{backgroundColor: variant.color }"
         >
-          {{ variant.color }}
+          <!-- {{ variant.color }} -->
         </div>
-        <button class="button" v-on:click="addToCart">Add to cart</button>
+        <button 
+          class="button"
+          :class="{disabledButton: !inStock}" 
+          v-on:click="addToCart"
+          :disabled="!inStock"
+        >
+        Add to cart
+      </button>
       </div>
     </div>
   </div>
