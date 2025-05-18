@@ -5,8 +5,8 @@ import socksBlueImage from './assets/images/socks_blue.jpeg'
 
 const product = ref('Socks')
 const image = ref(socksGreenImage)
-const inStock = false;
-// const inStock = true;
+// const inStock = false;
+const inStock = true;
   
 const details = ref(['50% cotton', '30% wool', '20% polyester'])
 
@@ -36,7 +36,8 @@ const updateImage = (variantImage) => image.value = variantImage
         <!-- <img v-bind:src="image" :class="{'out-of-stock-img': !inStock}" >  -->
 
         <!-- syntax :class="[ conditionref/condition ? 'classname': '' ]" -->
-        <img v-bind:src="image" :class="[ inStock ? 'out-of-stock-img': '' ]" > 
+        <!-- <img v-bind:src="image" :class="[ !inStock ? 'out-of-stock-img': '' ]" >  -->
+        <img v-bind:src="image" :class="[ inStock ? 'image': 'out-of-stock-img' ]" > 
 
       </div>
       <div class="product-info">
