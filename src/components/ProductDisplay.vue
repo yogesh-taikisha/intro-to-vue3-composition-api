@@ -58,7 +58,7 @@ const removeFromCart = () => {
 
 const updateVariant = (index) => {
   selectedVariant.value = index
-}
+};
 </script>
 
 <template>
